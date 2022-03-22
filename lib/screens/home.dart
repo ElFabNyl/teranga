@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'navigationTab/tab1.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -8,6 +10,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _selectedTab = 0;
+
+  final List<Widget> _tabWidgets = [
+    const Tab1(),
+    Text('no data'),
+    Text('no data'),
+    Text('no data')
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,75 +39,50 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: 200,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15.0),
-                child: ListView(
-                  // This next line does the trick.
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                          color: const Color(0xffC4E0FC),
-                          borderRadius: BorderRadius.circular(15.0)),
-                      width: 350.0,
-                      height: 170,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text(
-                                  'Visa',
-                                  style: TextStyle(
-                                      color: Color(0xff6937FA),
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18.0),
-                                ),
-                                Text(
-                                  '..9345',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18.0),
-                                )
-                              ],
-                            ),
-                            const Text(
-                              '200,000 XFA',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w800, fontSize: 23.0),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10.0,),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: const Color(0xffE3D9FF),
-                          borderRadius: BorderRadius.circular(15.0)),
-                      width: 350.0,
-                      height: 170,
-                      child: Column(
-                        children: [],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: const Color(0xff6937FA),
+        unselectedItemColor: Colors.white,
+        backgroundColor: const Color(0xffEBE4FF),
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedTab,
+        // i should handle this state with BloC
+        onTap: (index) {
+          setState(() {
+            _selectedTab = index;
+          });
+        },
+        items: [
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.send),
+            label: const Text(
+              'Send money',
+              style: TextStyle(color: Colors.black),
+            ).data,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.upcoming),
+            label: const Text(
+              'Top up',
+              style: TextStyle(color: Colors.black),
+            ).data,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.track_changes),
+            label: const Text(
+              'Transaction',
+              style: TextStyle(color: Colors.black),
+            ).data,
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          _tabWidgets[_selectedTab],
+        ],
       ),
     );
   }
