@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../beneficiary_list.dart';
 import '../components/beneficiary.dart';
 import '../components/composant_row.dart';
 
@@ -131,6 +133,7 @@ class Tab1 extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     //
+                    Get.to(() => const BeneficiaryList());
                   },
                   child: Row(
                     children: const [

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:teranga/screens/profil.dart';
 
 import 'navigationTab/tab1.dart';
+import 'navigationTab/tab2.dart';
+import 'navigationTab/tab3.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,8 +18,9 @@ class _HomeState extends State<Home> {
 
   final List<Widget> _tabWidgets = [
     const Tab1(),
-    Text('no data'),
-    Text('no data'),
+    const Tab2(),
+    const Tab3(),
+    
     Text('no data')
   ];
 
@@ -34,7 +39,12 @@ class _HomeState extends State<Home> {
             child: SizedBox(
               height: 40.0,
               width: 40.0,
-              child: Image.asset('assets/images/a.png'),
+              child: GestureDetector(
+                onTap: (){
+                  Get.to(()=> const Profil());
+                },
+                child: Image.asset('assets/images/a.png'),
+              ),
             ),
           ),
         ],
