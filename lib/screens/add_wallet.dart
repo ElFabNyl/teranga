@@ -45,6 +45,8 @@ class _AddWalletState extends State<AddWallet> {
                           CircleAvatar(
                             radius: 30.0,
                             backgroundColor: const Color(0xffFFDBD9),
+
+                            
                             child: Image.asset('assets/images/phone.png'),
                           ),
                           const Text(
